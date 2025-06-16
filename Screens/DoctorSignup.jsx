@@ -190,15 +190,36 @@ const DoctorSignup = () => {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity
-              style={styles.dropdown}
-              onPress={() => setShowSpecializationModal(true)}
-            >
+            {/* Specialization Dropdown */}
+            <TouchableOpacity style={styles.dropdown} onPress={() => setShowSpecializationModal(true)}>
               <Text style={specialization ? styles.selectedText : styles.placeholderText}>
                 {specialization || "Select Specialization"}
               </Text>
               <Ionicons name="chevron-down" size={20} color="#ccc" />
             </TouchableOpacity>
+
+            {/* Specialization Modal with Gradient */}
+            <Modal visible={showSpecializationModal} transparent animationType="fade">
+              <View style={styles.modalOverlay}>
+                <LinearGradient colors={["#4c669f", "#3b5998", "#192f6a"]} style={styles.modalContent}>
+                  <FlatList
+                    data={specializationList}
+                    keyExtractor={(item) => item}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity
+                        onPress={() => {
+                          setSpecialization(item);
+                          setShowSpecializationModal(false);
+                        }}
+                        style={styles.modalItem}
+                      >
+                        <Text style={styles.modalItemText}>{item}</Text>
+                      </TouchableOpacity>
+                    )}
+                  />
+                </LinearGradient>
+              </View>
+            </Modal>
 
             <TextInput
               style={styles.input}
@@ -254,33 +275,6 @@ const DoctorSignup = () => {
           </Animated.View>
         </ScrollView>
       </KeyboardAvoidingView>
-
-      {/* Modal Picker */}
-      <Modal visible={showSpecializationModal} transparent animationType="fade">
-        <TouchableOpacity
-          style={styles.modalOverlay}
-          activeOpacity={1}
-          onPressOut={() => setShowSpecializationModal(false)}
-        >
-          <View style={styles.modalContent}>
-            <FlatList
-              data={specializationList}
-              keyExtractor={(item) => item}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() => {
-                    setSpecialization(item);
-                    setShowSpecializationModal(false);
-                  }}
-                  style={styles.modalItem}
-                >
-                  <Text style={styles.modalItemText}>{item}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        </TouchableOpacity>
-      </Modal>
 
       {/* Custom Alert Modal */}
       <Modal visible={alertModal.visible} transparent animationType="fade">
@@ -396,6 +390,30 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#ccc",
   },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    padding: 20,
+  },
+  modalContent: {
+    borderRadius: 15,
+    padding: 15,
+    maxHeight: 350,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 10,
+  },
+  modalItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+  },
+  modalItemText: {
+    fontSize: 16,
+    color: "#fff",
+  },
   button: {
     backgroundColor: "#5a8dee",
     paddingVertical: 16,
@@ -410,27 +428,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 18,
     letterSpacing: 1,
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.4)",
-    padding: 20,
-  },
-  modalContent: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 15,
-    maxHeight: 300,
-  },
-  modalItem: {
-    paddingVertical: 10,
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1,
-  },
-  modalItemText: {
-    fontSize: 16,
-    color: "#000",
   },
   alertBox: {
     backgroundColor: "#fff",
