@@ -14,7 +14,7 @@ MedHub is a role-based cross-platform mobile application designed to digitize pa
 - View prescription history
 - Receive referrals from other doctors
 
-### 🧑‍⚕️ For Doctors:
+### 🧑‍⚕ For Doctors:
 - Create and manage doctor profile
 - Set weekly availability slots
 - View and manage booked appointments
@@ -30,7 +30,6 @@ MedHub is a role-based cross-platform mobile application designed to digitize pa
 | Frontend    | React Native       |
 | Backend     | Firebase Firestore |
 | Auth        | Firebase Auth      |
-| Storage     | Firebase Storage   |
 | Language    | JavaScript / JSX   |
 | UI Routing  | React Navigation   |
 | Development | Visual Studio Code |
@@ -42,7 +41,6 @@ MedHub is a role-based cross-platform mobile application designed to digitize pa
 
 - 🔐 **Authentication:** Role-based sign-up/login for Patients and Doctors
 - 🔄 **Firestore Database:** Stores user data, appointments, and prescriptions
-- ☁️ **Cloud Storage:** Uploads and stores proof of payments
 - 🔒 **Security Rules:** Protects data access by user roles (Doctors/Patients)
 
 ---
